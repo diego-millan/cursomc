@@ -3,6 +3,7 @@ package com.diegomillan.cursomc.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.diegomillan.cursomc.domain.Categoria;
@@ -30,6 +31,20 @@ public class CategoriaService {
 	public Categoria update(Categoria categoria) throws ObjectNotFoundException  {
 		find(categoria.getId());
 		return repo.save(categoria);
+	}
+
+	public void delete(Integer id) throws ObjectNotFoundException {
+		find(id);
+		try {
+			repo.deleteById(id);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException(dataIntegrityException());
+		}
+	}
+
+	private String dataIntegrityException() {
+		return "Não é possível excluir uma categoria que possui produtos";
 	}
 
 	private String categoriaNotFoundException(Integer id) {
