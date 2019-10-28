@@ -12,6 +12,7 @@ import com.diegomillan.cursomc.services.CategoriaService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,11 @@ public class CategoriaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Categoria categoria) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO) {
+
 		ResponseEntity responseEntity;
+		Categoria categoria = service.fromDTO(categoriaDTO);
+
 		categoria = service.insert(categoria);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
 				buildAndExpand(categoria.getId()).toUri();
@@ -42,9 +46,10 @@ public class CategoriaResource {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Categoria categoria, @PathVariable Integer id)
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO categoriaDTO, @PathVariable Integer id)
 			throws  ObjectNotFoundException {
 
+		Categoria categoria = service.fromDTO(categoriaDTO);
 		categoria.setId(id);
 		categoria = service.update(categoria);
 		return ResponseEntity.noContent().build();

@@ -3,6 +3,7 @@ package com.diegomillan.cursomc.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.diegomillan.cursomc.CategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -62,5 +63,9 @@ public class CategoriaService {
 
 	private String categoriaNotFoundException(Integer id) {
 		return "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName();
+	}
+
+	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+		return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
 	}
 }
