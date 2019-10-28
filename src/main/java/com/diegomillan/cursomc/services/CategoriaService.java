@@ -3,7 +3,7 @@ package com.diegomillan.cursomc.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.diegomillan.cursomc.CategoriaDTO;
+import com.diegomillan.cursomc.dto.CategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;

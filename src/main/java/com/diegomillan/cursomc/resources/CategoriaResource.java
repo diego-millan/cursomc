@@ -1,6 +1,6 @@
 package com.diegomillan.cursomc.resources;
 
-import com.diegomillan.cursomc.CategoriaDTO;
+import com.diegomillan.cursomc.dto.CategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
