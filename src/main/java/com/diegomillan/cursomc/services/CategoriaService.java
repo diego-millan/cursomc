@@ -1,9 +1,9 @@
 package com.diegomillan.cursomc.services;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.diegomillan.cursomc.domain.Categoria;
 import com.diegomillan.cursomc.dto.CategoriaDTO;
+import com.diegomillan.cursomc.repositories.CategoriaRepository;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -11,10 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.diegomillan.cursomc.domain.Categoria;
-import com.diegomillan.cursomc.repositories.CategoriaRepository;
-
-import javassist.tools.rmi.ObjectNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -34,8 +32,9 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria categoria) throws ObjectNotFoundException  {
-		find(categoria.getId());
-		return repo.save(categoria);
+		Categoria categoriaAlteracao = find(categoria.getId());
+		updateData(categoriaAlteracao, categoria);
+		return repo.save(categoriaAlteracao);
 	}
 
 	public void delete(Integer id) throws ObjectNotFoundException {
@@ -67,5 +66,9 @@ public class CategoriaService {
 
 	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
 		return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
+	}
+
+	private void updateData(Categoria categoriaAlteracao, Categoria categoria) {
+		categoriaAlteracao.setNome(categoria.getNome());
 	}
 }
