@@ -2,6 +2,7 @@ package com.diegomillan.cursomc.resources;
 
 import com.diegomillan.cursomc.domain.Cliente;
 import com.diegomillan.cursomc.dto.ClienteDTO;
+import com.diegomillan.cursomc.dto.ClienteInsertionDTO;
 import com.diegomillan.cursomc.services.ClienteService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,10 @@ public class ClienteResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO clienteDTO) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteInsertionDTO clienteInsertionDTO) {
 
 		ResponseEntity responseEntity;
-		Cliente cliente = service.fromDTO(clienteDTO);
+		Cliente cliente = service.fromDTO(clienteInsertionDTO);
 
 		cliente = service.insert(cliente);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
