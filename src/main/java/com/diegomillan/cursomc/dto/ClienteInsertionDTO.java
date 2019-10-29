@@ -1,22 +1,39 @@
 package com.diegomillan.cursomc.dto;
 
+import com.diegomillan.cursomc.services.validation.ClienteInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClienteInsert
 public class ClienteInsertionDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Length(min = 5, max = 80, message = "Tamanho deve ter entre 5 e 80 caracteres")
     private String nome;
+
+    @NotEmpty(message = "preenchimento obrigatório")
+    @Email(message = "e-mail inválido")
     private String email;
+
+    @NotEmpty(message = "preenchimento obrigatório")
     private String cpfOuCnpj;
     private Integer tipo;
 
+    @NotEmpty(message = "preenchimento obrigatório")
     private String logradouro;
+    @NotEmpty(message = "preenchimento obrigatório")
     private String numero;
     private String complemento;
     private String bairro;
-    private String cep;
 
+    @NotEmpty(message = "preenchimento obrigatório")
+    private String cep;
+    @NotEmpty(message = "preenchimento obrigatório")
     private String telefone1;
 
     private String telefone2;
