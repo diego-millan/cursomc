@@ -63,6 +63,7 @@ public class CursomcApplication implements CommandLineRunner{
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
+
 	}
 
 	@Override
