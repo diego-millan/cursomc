@@ -16,11 +16,11 @@ import java.util.Optional;
 
 
 @Service
-public class CategoriaService {
+public class CategoriaService implements ICategoriaService{
 	
 	@Autowired
 	private CategoriaRepository repo;
-	
+
 	public Categoria find(Integer id) throws ObjectNotFoundException  {
 		Optional<Categoria> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(categoriaNotFoundException(id)));
@@ -71,4 +71,5 @@ public class CategoriaService {
 	private void updateData(Categoria categoriaAlteracao, Categoria categoria) {
 		categoriaAlteracao.setNome(categoria.getNome());
 	}
+
 }

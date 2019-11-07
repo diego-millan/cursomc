@@ -1,6 +1,7 @@
 package com.diegomillan.cursomc.resources;
 
 import com.diegomillan.cursomc.dto.CategoriaDTO;
+import com.diegomillan.cursomc.services.ICategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 public class CategoriaResource {
 	
 	@Autowired
-	private CategoriaService service;
+	private ICategoriaService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) throws ObjectNotFoundException {
@@ -32,7 +33,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(categoria);
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO) {
 
 		ResponseEntity responseEntity;
