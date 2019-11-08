@@ -2,10 +2,8 @@ package com.diegomillan.cursomc.resources;
 
 import com.diegomillan.cursomc.domain.Categoria;
 import com.diegomillan.cursomc.dto.CategoriaDTO;
-import com.diegomillan.cursomc.services.CategoriaService;
 import com.diegomillan.cursomc.services.ICategoriaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javassist.tools.rmi.ObjectNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

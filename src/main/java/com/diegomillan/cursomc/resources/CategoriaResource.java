@@ -1,21 +1,17 @@
 package com.diegomillan.cursomc.resources;
 
+import com.diegomillan.cursomc.domain.Categoria;
 import com.diegomillan.cursomc.dto.CategoriaDTO;
 import com.diegomillan.cursomc.services.ICategoriaService;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.diegomillan.cursomc.domain.Categoria;
-import com.diegomillan.cursomc.services.CategoriaService;
-
-import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
