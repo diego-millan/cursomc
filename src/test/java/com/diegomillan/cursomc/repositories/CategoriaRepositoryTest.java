@@ -1,8 +1,6 @@
 package com.diegomillan.cursomc.repositories;
 
 import com.diegomillan.cursomc.domain.Categoria;
-import com.diegomillan.cursomc.repositories.CategoriaRepository;
-import javassist.tools.rmi.ObjectNotFoundException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +32,7 @@ public class CategoriaRepositoryTest {
     public void givenValidCategoriaWhenFindByNameThenReturnCategoria() {
         testEntityManager.persistAndFlush(new Categoria(null, "Informática"));
         Categoria categoriaFound = categoriaRepository.findByNome("Informática");
+
         Assert.assertNotNull(categoriaFound);
     }
 
@@ -46,6 +45,7 @@ public class CategoriaRepositoryTest {
     public void givenValidCategoriaWhenDeleteInDatabaseThenCheckIfIsDeleted() {
         Categoria categoriaPersisted = testEntityManager.persistAndFlush(new Categoria(null, "Geek"));
         categoriaRepository.deleteById(categoriaPersisted.getId());
+
         Assert.assertFalse(categoriaRepository.findById(1).isPresent());
     }
 
@@ -55,6 +55,7 @@ public class CategoriaRepositoryTest {
         categoriaUpdate.setNome("Geek");
         categoriaRepository.save(categoriaUpdate);
         Categoria categoriaFound = categoriaRepository.findByNome("Geek");
+
         Assert.assertEquals(categoriaFound.getNome(), "Geek");
     }
 }
