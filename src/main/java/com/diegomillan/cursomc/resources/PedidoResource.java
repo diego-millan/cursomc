@@ -1,14 +1,16 @@
 package com.diegomillan.cursomc.resources;
 
 import com.diegomillan.cursomc.domain.Pedido;
+import com.diegomillan.cursomc.resources.utils.URL;
 import com.diegomillan.cursomc.services.PedidoService;
 import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
 
 @RestController
 @RequestMapping(value="/pedidos")
@@ -22,5 +24,15 @@ public class PedidoResource {
 		
 		Pedido pedido = service.find(id);
 		return ResponseEntity.ok().body(pedido);
+	}
+
+	@PostMapping
+	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido pedido) {
+		pedido = service.insert(pedido);
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(pedido.getId()).toUri();
+
+		return ResponseEntity.created(uri).build();
 	}
 }

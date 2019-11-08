@@ -1,0 +1,20 @@
+{
+  "cliente": { "id": 1},
+    
+  "enderecoDeEntrega": { "id" : 1  },
+  "itens": [
+    {
+      "quantidade" : 1,
+      "produto" : {"id" : 1}
+    },
+    {
+      "quantidade" : 2,
+      "produto" : {"id" : 3}
+    }
+
+  ],
+  "pagamento": {
+    "numeroDeParcelas" : 10,
+    "@type": "pagamentoComCartao"
+  }
+}
