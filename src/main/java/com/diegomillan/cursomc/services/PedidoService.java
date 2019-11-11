@@ -37,6 +37,9 @@ public class PedidoService {
 	@Autowired
 	private ClienteService clienteService;
 
+	@Autowired
+	private EmailService emailService;
+
 	public Pedido find(Integer id) throws ObjectNotFoundException  {
 		Optional<Pedido> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(pedidoNotFoundException(id)));
@@ -65,7 +68,7 @@ public class PedidoService {
 		pagamentoRepository.save(pedido.getPagamento());
 
 		insertItemPedido(pedido);
-		System.out.println(pedido);
+		emailService.sendOrderConfirmation(pedido);
 		return pedido;
     }
 
