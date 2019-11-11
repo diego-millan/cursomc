@@ -2,10 +2,11 @@ package com.diegomillan.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.io.Serializable;
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 @Entity
 public class ItemPedido implements Serializable {
@@ -111,7 +112,19 @@ public class ItemPedido implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduto().getNome());
+		builder.append(", Qtd: ");
+		builder.append(getQuantidade());
+		builder.append(", preço unitário: ");
+		builder.append(numberFormat.format(getPreco()));
+		builder.append(", Subtotal: ");
+		builder.append(numberFormat.format(getSubTotal()));
+		builder.append("\n");
+		return builder.toString();
+	}
 }

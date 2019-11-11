@@ -27,7 +27,7 @@ public class PedidoResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido pedido) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido pedido) throws ObjectNotFoundException {
 		pedido = service.insert(pedido);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
